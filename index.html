@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d4561a">
+<title>Preseason Picks '26-27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: scorer's-table sheet. One narrow column, sticky tab bar, box-score rows with tabular numbers, ball-orange accent. */
+:root{
+  --bg:#f3f2ef; --surface:#ffffff; --sunk:#e9e7e2; --fg:#1b1d22; --muted:#666a73; --line:#d8d5ce;
+  --accent:#d4561a; --accent-fg:#ffffff; --accent-soft:#f8e3d6;
+  --good:#1f7a4a; --bad:#b3261e;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141518; --surface:#1d1f24; --sunk:#25282e; --fg:#ecebe7; --muted:#9a9ea7; --line:#33363d;
+  --accent:#f07a3e; --accent-fg:#1a0e06; --accent-soft:#3a2418; --good:#5cc48a; --bad:#f2847b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141518; --surface:#1d1f24; --sunk:#25282e; --fg:#ecebe7; --muted:#9a9ea7; --line:#33363d;
+  --accent:#f07a3e; --accent-fg:#1a0e06; --accent-soft:#3a2418; --good:#5cc48a; --bad:#f2847b; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45;font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 120px}
+header.top{padding-block:20px 8px;display:flex;flex-direction:column;gap:6px}
+h1{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;margin:0;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+h1 span{color:var(--accent)}
+h2{font-family:var(--display);font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.03em;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0}
+.lock{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.lock b{color:var(--fg);font-weight:600}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--accent-soft);color:var(--accent)}
+.pill.closed{background:var(--sunk);color:var(--muted)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;padding-block:10px;border-bottom:1px solid var(--line)}
+nav.tabs button{flex:1 1 0;font-family:var(--display);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.05em;padding:9px 8px;border:0;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer}
+nav.tabs button[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+section.view{display:flex;flex-direction:column;gap:22px;padding-top:18px}
+.group{display:flex;flex-direction:column;gap:10px}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.row{display:grid;grid-template-columns:minmax(0,9.5em) minmax(0,1fr);align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row label{font-weight:600;font-size:15px}
+.row label small{display:block;font-weight:400;color:var(--muted);font-size:13px;line-height:1.25}
+input[type=text],input[type=number],input[type=password],select{width:100%;min-width:0;font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input:disabled,select:disabled{opacity:.75}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 5.5em;gap:8px}
+@media (max-width:460px){.row{grid-template-columns:1fr;gap:6px}}
+.btn{font:inherit;font-weight:600;font-size:15px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.btn.block{width:100%;padding:13px}
+.btn.danger{color:var(--bad)}
+.btn:disabled{opacity:.5;cursor:default}
+.muted{color:var(--muted)}
+.note{font-size:14px;color:var(--muted);margin:0}
+.notice{border:1px solid var(--line);background:var(--sunk);border-radius:10px;padding:12px 14px;font-size:14px}
+.notice.warn{border-color:var(--accent);background:var(--accent-soft)}
+.who{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.who input{flex:1 1 12em}
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));padding-top:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.savebar .in{max-width:720px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.savebar .status{flex:1;font-size:13px;color:var(--muted);min-width:0}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;box-shadow:0 0 0 1px var(--line);flex:none}
+/* typeahead */
+.combo{position:relative;min-width:0}
+.sugg{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:8;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);max-height:280px;overflow-y:auto}
+.sugg button{display:block;width:100%;text-align:left;font:inherit;font-size:15px;padding:11px 12px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.sugg button:first-child{border-top:0}
+.sugg button:hover,.sugg button:focus-visible{background:var(--accent-soft)}
+/* bonus */
+.bonus{scroll-margin-top:72px;border:2px dashed var(--line);border-radius:14px;padding:16px 14px;display:flex;flex-direction:column;gap:18px}
+.eyebrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.confs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+table.box{width:100%;border-collapse:collapse;font-size:14px}
+table.box th{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:12px;color:var(--muted);text-align:right;padding:8px 10px;border-bottom:1px solid var(--line)}
+table.box th:nth-child(2){text-align:left}
+table.box td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--line)}
+table.box tr:last-child td{border-bottom:0}
+table.box td.tm{text-align:left;font-weight:600}
+table.box td.tm span{display:inline-flex;align-items:center;gap:7px}
+table.box tr.cut td{border-bottom:2px solid var(--fg)}
+table.box tr.cut2 td{border-bottom:2px dashed var(--muted)}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.matchups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:8px}
+.mu{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.mu .cap{font-size:12px;color:var(--muted);padding:6px 10px 0;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.mu button{display:flex;width:100%;align-items:center;gap:8px;text-align:left;font:inherit;font-size:15px;padding:9px 10px;border:0;background:transparent;color:var(--fg);cursor:pointer}
+.mu button+button{border-top:1px solid var(--line)}
+.mu button .sd{font-family:var(--display);font-weight:700;color:var(--muted);width:1.4em;text-align:right}
+.mu button.win{background:var(--accent-soft);font-weight:700}
+.mu button.win .sd{color:var(--accent)}
+.mu button.lose{color:var(--muted)}
+.mu button:disabled{cursor:default}
+.mu .tbd{padding:9px 10px;color:var(--muted);font-size:14px}
+.champ{text-align:center;padding:18px;border:2px solid var(--accent);border-radius:12px;background:var(--surface)}
+.champ .t{font-family:var(--display);font-weight:700;font-size:28px;text-transform:uppercase}
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column}
+.modal .mh{border-bottom:1px solid var(--line);padding-top:calc(12px + env(safe-area-inset-top,0px));padding-bottom:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.modal .mh .in,.modal .mf .in,.modal .mb .in{max-width:720px;margin:0 auto}
+.modal .mh .in{display:flex;flex-direction:column;gap:6px}
+.modal .mb{flex:1;overflow-y:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+.modal .mf{border-top:1px solid var(--line);background:var(--surface);padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.modal .mf .in{display:flex;gap:10px}
+.modal .mf .in .btn{flex:1}
+.tot{font-size:14px;color:var(--muted)} .tot b{color:var(--fg)}
+.whead{font-family:var(--display);font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.04em;padding:14px 0 4px;border-bottom:2px solid var(--fg)}
+.wrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.wrow .nm{font-weight:700;display:flex;align-items:center;gap:7px}
+.wrow .nm .sd{font-family:var(--display);color:var(--muted);min-width:1.3em}
+.wrow .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:2px}
+.wrow .meta b{color:var(--fg);font-weight:600}
+.step{display:flex;align-items:center;gap:4px}
+.step button{width:40px;height:40px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:20px;font-weight:600;cursor:pointer}
+.step input{width:3.4em;text-align:center;font-weight:700;padding:8px 2px}
+.ou-tag{font-size:12px;font-weight:700;width:1.6em;text-align:center}
+/* everyone */
+.ans{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px;padding:9px 14px;border-top:1px solid var(--line);font-size:15px}
+.ans:first-child{border-top:0}
+.ans .n{font-weight:600}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally span{background:var(--sunk);border-radius:999px;padding:3px 10px;font-size:13px}
+.people{display:flex;flex-wrap:wrap;gap:8px}
+.lb{display:grid;grid-template-columns:2em minmax(0,1fr) auto;gap:8px;padding:9px 14px;border-top:1px solid var(--line);align-items:center}
+.lb:first-child{border-top:0}
+.lb .rk{font-family:var(--display);font-weight:700;color:var(--accent);font-size:18px}
+.chk{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px}
+.chk label{display:inline-flex;gap:5px;align-items:center;font-size:14px;background:var(--sunk);border-radius:8px;padding:5px 8px}
+.awr{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:8px 12px;padding:10px 14px}
+.awr label{font-size:13px;display:flex;flex-direction:column;gap:3px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;z-index:30;max-width:90vw;text-align:center}
+@media (prefers-reduced-motion:no-preference){.mu button{transition:background .12s}html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="top">
+    <h1>Preseason Picks <span>'26–27</span></h1>
+    <div class="lock" id="lockline"></div>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="picks" aria-selected="true">My Picks</button>
+    <button role="tab" data-tab="all" aria-selected="false">Everyone</button>
+    <button role="tab" data-tab="results" aria-selected="false">Results</button>
+  </nav>
+  <section class="view" id="v-picks"></section>
+  <section class="view" id="v-all" hidden></section>
+  <section class="view" id="v-results" hidden></section>
+</div>
+<div class="savebar" id="savebar" hidden><div class="in"><div class="status" id="savestatus"></div><button class="btn primary" id="savebtn">Save picks</button></div></div>
+<div id="modalroot"></div>
+
+<script>
+/* ===== SETUP: paste your Supabase project URL and publishable (anon) key here ===== */
+const CONFIG = {
+  supabaseUrl: "",
+  supabaseKey: ""
+};
+/* ================================================================================ */
+(function(){
+const LOCK = Date.parse("2026-10-20T22:00:00-04:00");
+const SEASONS = ["23-24","24-25","25-26"];
+// abbr, name, conf, over/under, wins 23-24 / 24-25 / 25-26 (Basketball Reference), color, head coach
+const T = [
+ ["ATL","Atlanta Hawks","E",44.5,[36,40,46],"#C8102E","Quin Snyder"],
+ ["BOS","Boston Celtics","E",49.5,[64,61,56],"#007A33","Joe Mazzulla"],
+ ["BKN","Brooklyn Nets","E",24.5,[32,26,20],"#111111","Jordi Fernandez"],
+ ["CHA","Charlotte Hornets","E",37.5,[21,19,44],"#00788C","Charles Lee"],
+ ["CHI","Chicago Bulls","E",29.5,[39,39,31],"#CE1141","Tiago Splitter"],
+ ["CLE","Cleveland Cavaliers","E",47.5,[48,64,52],"#860038","Kenny Atkinson"],
+ ["DET","Detroit Pistons","E",49.5,[14,44,60],"#1D42BA","J.B. Bickerstaff"],
+ ["IND","Indiana Pacers","E",43.5,[47,50,19],"#FDBB30","Rick Carlisle"],
+ ["MIA","Miami Heat","E",45.5,[46,37,43],"#98002E","Erik Spoelstra"],
+ ["MIL","Milwaukee Bucks","E",24.5,[49,48,32],"#00471B","Taylor Jenkins"],
+ ["NYK","New York Knicks","E",51.5,[50,51,53],"#F58426","Mike Brown"],
+ ["ORL","Orlando Magic","E",44.5,[47,41,45],"#0077C0","Sean Sweeney"],
+ ["PHI","Philadelphia 76ers","E",50.5,[47,24,45],"#006BB6","Nick Nurse"],
+ ["TOR","Toronto Raptors","E",45.5,[25,30,46],"#A0001E","Darko Rajakovic"],
+ ["WAS","Washington Wizards","E",35.5,[15,18,17],"#002B5C","Brian Keefe"],
+ ["DAL","Dallas Mavericks","W",35.5,[50,39,26],"#00538C","Dusty May"],
+ ["DEN","Denver Nuggets","W",48.5,[57,50,54],"#FEC524","David Adelman"],
+ ["GSW","Golden State Warriors","W",39.5,[46,48,37],"#1D428A","Steve Kerr"],
+ ["HOU","Houston Rockets","W",46.5,[41,52,52],"#CE1141","Ime Udoka"],
+ ["LAC","Los Angeles Clippers","W",28.5,[51,50,42],"#C8102E","Tyronn Lue"],
+ ["LAL","Los Angeles Lakers","W",45.5,[47,50,53],"#552583","JJ Redick"],
+ ["MEM","Memphis Grizzlies","W",28.5,[27,48,25],"#5D76A9","Tuomas Iisalo"],
+ ["MIN","Minnesota Timberwolves","W",48.5,[56,49,49],"#236192","Chris Finch"],
+ ["NOP","New Orleans Pelicans","W",28.5,[49,21,26],"#85714D","Jamahl Mosley"],
+ ["OKC","Oklahoma City Thunder","W",60.5,[57,68,64],"#007AC1","Mark Daigneault"],
+ ["PHX","Phoenix Suns","W",39.5,[49,36,45],"#E56020","Jordan Ott"],
+ ["POR","Portland Trail Blazers","W",43.5,[21,36,42],"#E03A3E","Micah Nori"],
+ ["SAC","Sacramento Kings","W",21.5,[46,40,22],"#5A2D81","Doug Christie"],
+ ["SAS","San Antonio Spurs","W",60.5,[22,34,62],"#8A8D8F","Mitch Johnson"],
+ ["UTA","Utah Jazz","W",36.5,[31,17,22],"#753BBD","Will Hardy"]
+];
+const TEAM = {}; T.forEach(t=>TEAM[t[0]]={a:t[0],n:t[1],c:t[2],ou:t[3],rec:t[4],col:t[5],coach:t[6]});
+const ABBRS = T.map(t=>t[0]);
+const BY_NAME = [...ABBRS].sort((x,y)=>TEAM[x].n.localeCompare(TEAM[y].n));
+const NICK = {POR:"Trail Blazers",PHI:"76ers"};
+const nick = a => !TEAM[a] ? "" : (NICK[a] || TEAM[a].n.split(" ").pop());
+
+const L = {
+ mvp:["Victor Wembanyama","Shai Gilgeous-Alexander","Nikola Jokic","Luka Doncic","Giannis Antetokounmpo","Anthony Edwards","Jayson Tatum","Cade Cunningham","Jalen Brunson","Donovan Mitchell","Jaylen Brown","Tyrese Maxey","Kawhi Leonard","Tyrese Haliburton","Kevin Durant","Joel Embiid","Stephen Curry","Devin Booker","Cooper Flagg","Deni Avdija","Zion Williamson","Scottie Barnes","Jamal Murray","Jalen Johnson","Paolo Banchero","LaMelo Ball","LeBron James","Austin Reaves","Anthony Davis","Karl-Anthony Towns","Tyler Herro","Alperen Sengun","James Harden","Ja Morant","Pascal Siakam","Amen Thompson","Bam Adebayo","Josh Giddey","Desmond Bane","Damian Lillard","Brandon Ingram","Domantas Sabonis","Lauri Markkanen","Jaren Jackson Jr.","Trae Young","Michael Porter Jr.","Franz Wagner","Kyrie Irving","Darius Garland","Jalen Williams"],
+ dpoy:["Victor Wembanyama","Chet Holmgren","Ausar Thompson","Rudy Gobert","Bam Adebayo","Evan Mobley","Scottie Barnes","Amen Thompson","Jaren Jackson Jr.","OG Anunoby","Giannis Antetokounmpo","Jaden McDaniels","Dyson Daniels","Walker Kessler","Jalen Suggs","Ivica Zubac","Donovan Clingan","Alex Caruso","Cason Wallace","Stephon Castle","Draymond Green","Jalen Duren","Derrick White","Herbert Jones","Anthony Davis"],
+ roy:["Cameron Boozer","Darryn Peterson","AJ Dybantsa","Caleb Wilson","Darius Acuff Jr.","Mikel Brown Jr.","Yaxel Lendeborg","Keaton Wagler","Brayden Burries","Christian Anderson Jr.","Nate Ament","Kingston Flemings","Morez Johnson Jr.","Labaron Philon Jr.","Cameron Carr","Aday Mara","Karim López","Dailyn Swain","Hannes Steinbach"],
+ mip:["Brandon Miller","Payton Pritchard","Kel'el Ware","Jaden McDaniels","Collin Murray-Boyles","Ausar Thompson","Walker Kessler","Ty Jerome","Zach Edey","Coby White","Stephon Castle","Ayo Dosunmu","Terrence Shannon Jr.","Ajay Mitchell","Matas Buzelis","Keegan Murray","Davion Mitchell","Kon Knueppel","Scoot Henderson","Donovan Clingan","Reed Sheppard","Jabari Smith Jr.","Alexandre Sarr","Egor Demin","Khaman Maluach","Cedric Coward","Trey Murphy III","Evan Mobley","Rui Hachimura","Ace Bailey"]
+};
+L.all = [...new Set([...L.mvp,...L.dpoy,...L.mip,...L.roy])].sort();
+
+const AWARDS = [
+ {k:"mvp",l:"MVP",list:"mvp"},
+ {k:"dpoy",l:"Defensive POY",list:"dpoy"},
+ {k:"roy",l:"Rookie of the Year",list:"roy"},
+ {k:"smoy",l:"Sixth Man",list:"all"},
+ {k:"mip",l:"Most Improved",list:"mip"},
+ {k:"coy",l:"Coach of the Year",coach:true},
+ {k:"clutch",l:"Clutch Player",list:"all"},
+ {k:"fmvp",l:"Finals MVP",list:"all"}
+];
+const OU_PICKS = [
+ {k:"bust",l:"Biggest disappointment",s:"Finishes furthest under its O/U"},
+ {k:"surprise",l:"Biggest surprise",s:"Finishes furthest over its O/U"},
+ {k:"tank",l:"Tank commander",s:"Worst record in the league"}
+];
+const CATS = [
+ ...AWARDS.map(a=>({k:a.k,l:a.l})),
+ {k:"champ",l:"Champion"},{k:"runnerup",l:"Finals runner-up"},
+ {k:"fired",l:"First coach fired"},
+ ...OU_PICKS.map(a=>({k:a.k,l:a.l})),
+ {k:"hiPlayer",l:"Highest-scoring game"}
+];
+
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const slugify = s => (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40);
+const teamName = a => TEAM[a] ? TEAM[a].n : "";
+const dot = a => TEAM[a] ? `<i class="dot" style="background:${TEAM[a].col}"></i>` : "";
+const rec = w => `${w}-${82-w}`;
+const locked = () => Date.now() >= LOCK;
+const fold = s => (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+function store(k,v){ try{ v==null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function load(k){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):null; }catch(e){ return null; } }
+
+// ===================== storage =====================
+// "web": a real site backed by Supabase. "claude": preview inside Claude. "none": nothing to save to.
+let mode = (CONFIG.supabaseUrl && CONFIG.supabaseKey) ? "web" : "none";
+let cdb = null, isOwner = false;
+let adminKey = load("pp27-admin");
+let isAdmin = false;
+function sbHeaders(extra){
+  const h = {"apikey":CONFIG.supabaseKey,"Content-Type":"application/json"};
+  if (!CONFIG.supabaseKey.startsWith("sb_")) h.Authorization = "Bearer " + CONFIG.supabaseKey;
+  return Object.assign(h, extra||{});
+}
+async function sb(path, opts){
+  opts = opts || {};
+  const r = await fetch(CONFIG.supabaseUrl.replace(/\/+$/,"") + "/rest/v1/" + path, Object.assign({}, opts, {headers: sbHeaders(opts.headers)}));
+  if (!r.ok){ let b={}; try{ b = await r.json(); }catch(e){} const err = new Error(b.message || ("HTTP "+r.status)); err.status=r.status; err.code=b.code; throw err; }
+  const t = await r.text(); return t ? JSON.parse(t) : null;
+}
+const rpc = (fn, args) => sb("rpc/"+fn, {method:"POST", body: JSON.stringify(args)});
+const api = {
+  async loadAll(){
+    if (mode==="web"){
+      const rows = await sb("entries?select=slug,data");
+      const next = {}; (rows||[]).forEach(r=>{ if (r.data && r.data.name) next[r.slug] = r.data; });
+      entries = next;
+      const rr = await sb("results?id=eq.1&select=data");
+      results = rr && rr[0] ? rr[0].data : null;
+    }
+  },
+  async saveEntry(slug, doc){
+    if (mode==="web"){
+      if (isAdmin && locked()) return rpc("admin_save_entry", {p_key:adminKey, p_slug:slug, p_name:doc.name, p_data:doc});
+      return sb("entries?on_conflict=slug", {method:"POST", headers:{"Prefer":"resolution=merge-duplicates,return=minimal"}, body: JSON.stringify({slug, name:doc.name, data:doc, updated_at:new Date().toISOString()})});
+    }
+    if (mode==="claude") return cdb.collection("entries").doc(slug).set(doc);
+    throw new Error("nowhere to save");
+  },
+  async deleteEntry(slug){
+    if (mode==="web") return rpc("admin_delete_entry", {p_key:adminKey, p_slug:slug});
+    if (mode==="claude") return cdb.collection("entries").doc(slug).delete();
+  },
+  async saveResults(R){
+    if (mode==="web") return rpc("admin_save_results", {p_key:adminKey, p_data:R});
+    if (mode==="claude") return cdb.doc("meta/results").set(R);
+  }
+};
+
+// ===================== state =====================
+let entries = {}, results = null;
+let tab = "picks", allCat = "mvp";
+let me = blank(""), dirty = false;
+let loadErr = false;
+
+function blank(name){ return {name, picks:{}, wins:null, bracket:{E:{r1:[],r2:[]},W:{r1:[],r2:[]},finals:null}, updatedAt:0}; }
+const draft = load("pp27-draft");
+if (draft && draft.name) me = Object.assign(blank(draft.name), draft);
+const savedTab = load("pp27-tab"); if (["picks","all","results"].includes(savedTab)) tab = savedTab;
+function markDirty(){ dirty = true; store("pp27-draft", me); renderSaveBar(); }
+const canEdit = () => !locked() || isAdmin;
+
+// ===================== standings & bracket =====================
+function seeds(conf, wins){ return ABBRS.filter(a=>TEAM[a].c===conf).sort((x,y)=> (wins[y]-wins[x]) || TEAM[x].n.localeCompare(TEAM[y].n)); }
+function bracketModel(e){
+  if (!e.wins) return null;
+  const B = e.bracket || {}, out = {};
+  for (const c of ["E","W"]){
+    const s = seeds(c, e.wins), b = B[c] || {r1:[],r2:[]}, m = {};
+    const seedOf = a => s.indexOf(a)+1;
+    m.pa = {cap:"7 vs 8 · winner is the 7 seed", t:[s[6],s[7]], s:[7,8]};
+    m.pb = {cap:"9 vs 10 · loser is out", t:[s[8],s[9]], s:[9,10]};
+    const loserA = b.pa ? (b.pa===s[6]?s[7]:s[6]) : null;
+    m.pc = {cap:"Last game · winner is the 8 seed", t:[loserA, b.pb||null], s:[loserA?seedOf(loserA):"", b.pb?seedOf(b.pb):""]};
+    const s7 = b.pa||null, s8 = b.pc||null;
+    const sd = a => !a ? "" : a===s7 ? 7 : a===s8 ? 8 : seedOf(a);
+    m.r1 = [{t:[s[0],s8],s:[1,8]},{t:[s[3],s[4]],s:[4,5]},{t:[s[2],s[5]],s:[3,6]},{t:[s[1],s7],s:[2,7]}];
+    const r1 = b.r1||[], r2 = b.r2||[];
+    m.r2 = [{t:[r1[0]||null,r1[1]||null]},{t:[r1[2]||null,r1[3]||null]}]; m.r2.forEach(x=>x.s=x.t.map(sd));
+    m.cf = {t:[r2[0]||null,r2[1]||null]}; m.cf.s = m.cf.t.map(sd);
+    m.sd = sd; m.seeds = s; out[c] = m;
+  }
+  out.F = {t:[(B.E||{}).cf||null,(B.W||{}).cf||null]};
+  out.F.s = [out.E.sd(out.F.t[0]), out.W.sd(out.F.t[1])];
+  return out;
+}
+function sanitize(e){
+  if (!e.wins) return;
+  e.bracket = e.bracket || {};
+  for (const c of ["E","W"]) { e.bracket[c] = e.bracket[c] || {}; e.bracket[c].r1 = e.bracket[c].r1||[]; e.bracket[c].r2 = e.bracket[c].r2||[]; }
+  const ok = (p, mu) => p && mu.t.includes(p) ? p : null;
+  for (let i=0;i<3;i++){
+    const M = bracketModel(e);
+    for (const c of ["E","W"]){
+      const b = e.bracket[c], m = M[c];
+      b.pa = ok(b.pa, m.pa); b.pb = ok(b.pb, m.pb); b.pc = ok(b.pc, m.pc);
+      for (let j=0;j<4;j++) b.r1[j] = ok(b.r1[j], m.r1[j]);
+      for (let j=0;j<2;j++) b.r2[j] = ok(b.r2[j], m.r2[j]);
+      b.cf = ok(b.cf, m.cf);
+    }
+    e.bracket.finals = ok(e.bracket.finals, M.F);
+  }
+  const f = e.bracket.finals;
+  if (f) { const M = bracketModel(e); e.picks.champ = f; e.picks.runnerup = M.F.t.find(x=>x!==f)||""; }
+}
+
+// ===================== form controls =====================
+function combo(id, list, val, dis, attrs){
+  return `<div class="combo"><input type="text" id="${id}" ${attrs||""} data-list="${list}" value="${esc(val)}" placeholder="Type or tap to pick" autocomplete="off" autocorrect="off" spellcheck="false" ${dis?"disabled":""}><div class="sugg" hidden></div></div>`;
+}
+function showSugg(inp){
+  const box = inp.parentElement.querySelector(".sugg"), q = fold(inp.value.trim());
+  const src = L[inp.dataset.list] || [];
+  let hits = !q ? src.slice(0,8) : src.filter(n=>fold(n).includes(q)).sort((a,b)=>{
+    const sa = fold(a).split(/\s+/).some(w=>w.startsWith(q)) ? 0 : 1, sb2 = fold(b).split(/\s+/).some(w=>w.startsWith(q)) ? 0 : 1; return sa - sb2; }).slice(0,8);
+  if (hits.length===1 && fold(hits[0])===q) hits = [];
+  box.innerHTML = hits.map(n=>`<button type="button" data-fill="${esc(n)}">${esc(n)}</button>`).join("");
+  box.hidden = !hits.length;
+}
+function hideSugg(){ document.querySelectorAll(".sugg").forEach(b=>b.hidden=true); }
+function coachSelect(id, val, dis, attrs, valueIsTeam){
+  return `<select id="${id}" ${attrs||""} ${dis?"disabled":""}><option value="">Pick a coach</option>${BY_NAME.map(a=>{ const v = valueIsTeam ? a : TEAM[a].coach; return `<option value="${esc(v)}" ${val===v?"selected":""}>${esc(TEAM[a].n)} · ${esc(TEAM[a].coach)}</option>`; }).join("")}</select>`;
+}
+function teamSelect(id, val, dis, attrs){
+  const opt = c => BY_NAME.filter(a=>TEAM[a].c===c).map(a=>`<option value="${a}" ${val===a?"selected":""}>${esc(TEAM[a].n)}</option>`).join("");
+  return `<select id="${id}" ${attrs||""} ${dis?"disabled":""}><option value="">Pick a team</option><optgroup label="East">${opt("E")}</optgroup><optgroup label="West">${opt("W")}</optgroup></select>`;
+}
+function ouSelect(id, val, dis, attrs){
+  return `<select id="${id}" ${attrs||""} ${dis?"disabled":""}><option value="">Pick a team</option>${BY_NAME.map(a=>`<option value="${a}" ${val===a?"selected":""}>${esc(TEAM[a].n)} · O/U ${TEAM[a].ou}</option>`).join("")}</select>`;
+}
+
+// ===================== header =====================
+function renderLock(){
+  const el = document.getElementById("lockline");
+  if (locked()) { el.innerHTML = `<span class="pill closed">Locked</span> Picks closed Tue Oct 20, 10:00 PM ET`; return; }
+  const ms = LOCK - Date.now(), d = Math.floor(ms/864e5), h = Math.floor(ms%864e5/36e5), m = Math.floor(ms%36e5/6e4);
+  el.innerHTML = `<span class="pill">Open</span> Locks <b>Tue Oct 20, 10:00 PM ET</b> · ${d?d+"d ":""}${h}h ${m}m left`;
+}
+
+// ===================== My Picks =====================
+function whoBlock(){
+  if (me.name){
+    const saved = entries[slugify(me.name)];
+    return `<div class="group"><div class="who"><div style="flex:1;min-width:0"><h3>Picking as</h3><div style="font-family:var(--display);font-weight:700;font-size:26px;text-transform:uppercase;overflow-wrap:anywhere">${esc(me.name)}</div></div><button class="btn" data-act="switch">Switch name</button></div>
+      ${saved?`<p class="note">Saved ${new Date(saved.updatedAt).toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}. You can keep editing until the lock.</p>`:`<p class="note">Not saved yet. Make your picks, then tap Save at the bottom.</p>`}
+      ${statusNotice()}</div>`;
+  }
+  return `<div class="group"><h2>Who's picking?</h2>
+    <p class="note">Enter your name. Already saved picks? Use the same name to pull them up and edit.</p>
+    <div class="who"><input type="text" id="nameinput" placeholder="Your name" autocomplete="name" maxlength="30"><button class="btn primary" data-act="setname">Start</button></div>
+    ${Object.keys(entries).length?`<p class="note">Already in: ${Object.values(entries).map(e=>esc(e.name)).sort().join(", ")}</p>`:""}${statusNotice()}</div>`;
+}
+function statusNotice(){
+  if (locked() && !isAdmin) return `<div class="notice">Picks are locked. Check the Everyone tab to compare.</div>`;
+  if (mode==="none") return `<div class="notice warn">This copy of the site isn't connected to the shared picks list yet, so picks can't be saved.</div>`;
+  if (loadErr) return `<div class="notice warn">Couldn't reach the picks list. Check your connection; the page retries on its own.</div>`;
+  return "";
+}
+function renderPicks(){
+  const v = document.getElementById("v-picks");
+  if (!me.name){ v.innerHTML = whoBlock(); return; }
+  const dis = !canEdit(), p = me.picks;
+  v.innerHTML = whoBlock() + `
+  <div class="group"><h2>Awards</h2><div class="sheet">
+    ${AWARDS.map(a=>`<div class="row"><label for="f-${a.k}">${a.l}</label>${a.coach ? coachSelect("f-"+a.k, p[a.k], dis, `data-pick="${a.k}"`) : combo("f-"+a.k, a.list, p[a.k], dis, `data-pick="${a.k}"`)}</div>`).join("")}
+  </div></div>
+  <div class="group"><h2>The Finals</h2><div class="sheet">
+    <div class="row"><label for="f-champ">Champion</label>${teamSelect("f-champ", p.champ, dis, `data-pick="champ"`)}</div>
+    <div class="row"><label for="f-runnerup">Finals runner-up</label>${teamSelect("f-runnerup", p.runnerup, dis, `data-pick="runnerup"`)}</div>
+  </div>${me.bracket&&me.bracket.finals?`<p class="note">Filled in from your bracket below.</p>`:""}</div>
+  <div class="group"><h2>Side bets</h2><div class="sheet">
+    <div class="row"><label for="f-fired">First coach fired</label>${coachSelect("f-fired", p.fired, dis, `data-pick="fired"`, true)}</div>
+    ${OU_PICKS.map(a=>`<div class="row"><label for="f-${a.k}">${a.l}<small>${a.s}</small></label>${ouSelect("f-"+a.k, p[a.k], dis, `data-pick="${a.k}"`)}</div>`).join("")}
+    <div class="row"><label for="f-hiPlayer">Highest-scoring game<small>Who, and how many points</small></label><div class="split">${combo("f-hiPlayer","all",p.hiPlayer,dis,`data-pick="hiPlayer"`)}<input type="number" id="f-hiPts" data-pick="hiPts" inputmode="numeric" min="30" max="110" value="${esc(p.hiPts)}" placeholder="Pts" ${dis?"disabled":""}></div></div>
+  </div></div>
+  <div class="bonus" id="bonus">${bonusHTML()}</div>`;
+}
+function bonusHTML(){
+  const dis = !canEdit();
+  const head = `<div class="group"><div class="eyebrow"><span class="pill">Bonus round</span><span class="note">Optional</span></div>
+    <h2>Standings & bracket</h2>`;
+  if (!me.wins){
+    return head + `<p class="note">Skip this if you want. Your picks above count either way. If you're in, pick a win total for all 30 teams. Your standings, play-in and playoff bracket build from those totals, and your bracket fills in your Finals pick.</p>
+      <button class="btn primary block" data-act="openwins" ${dis?"disabled":""}>Set win totals</button></div>`;
+  }
+  const M = bracketModel(me), total = ABBRS.reduce((s,a)=>s+me.wins[a],0), d = total-1230;
+  const stand = c => `<div class="sheet" style="overflow-x:auto"><table class="box"><thead><tr><th>#</th><th>${c==="E"?"East":"West"}</th><th>W-L</th><th>vs O/U</th></tr></thead><tbody>
+      ${M[c].seeds.map((a,i)=>{ const x = me.wins[a]-TEAM[a].ou; return `<tr class="${i===5?"cut":i===9?"cut2":""}"><td>${i+1}</td><td class="tm"><span>${dot(a)}${esc(nick(a))}</span></td><td>${rec(me.wins[a])}</td><td class="${x>0?"pos":"neg"}">${x>0?"+":""}${x}</td></tr>`; }).join("")}
+    </tbody></table></div>`;
+  return head + `<div class="who"><p class="note" style="flex:1">League total <b>${total}</b> wins${d?` (${d>0?"+":""}${d} vs. the real 1,230)`:" (balanced)"}. Ties go alphabetical. Solid line = playoffs, dashed = play-in.</p><button class="btn" data-act="openwins" ${dis?"disabled":""}>Edit win totals</button></div></div>
+    <div class="confs">${stand("E")}${stand("W")}</div>
+    <div class="group"><h2>Your bracket</h2><p class="note">Tap the winner of each matchup. Changing a pick clears anything later that depended on it.</p></div>
+    ${["E","W"].map(c=>confBracket(c, M, dis)).join("")}
+    <div class="group"><h3>NBA Finals</h3><div class="matchups">${mu(M.F.t, M.F.s, me.bracket.finals, "F", "finals", -1, "East vs West", dis)}</div>
+    ${me.bracket.finals?`<div class="champ"><h3>Your champion</h3><div class="t">${esc(teamName(me.bracket.finals))}</div></div>`:""}</div>`;
+}
+function confBracket(c, M, dis){
+  const m = M[c], b = me.bracket[c], name = c==="E"?"East":"West";
+  return `<div class="group"><h3>${name} play-in</h3><div class="matchups">${mu(m.pa.t,m.pa.s,b.pa,c,"pa",-1,m.pa.cap,dis)}${mu(m.pb.t,m.pb.s,b.pb,c,"pb",-1,m.pb.cap,dis)}${mu(m.pc.t,m.pc.s,b.pc,c,"pc",-1,m.pc.cap,dis)}</div></div>
+    <div class="group"><h3>${name} first round</h3><div class="matchups">${m.r1.map((x,i)=>mu(x.t,x.s,b.r1[i],c,"r1",i,"",dis)).join("")}</div></div>
+    <div class="group"><h3>${name} semifinals</h3><div class="matchups">${m.r2.map((x,i)=>mu(x.t,x.s,b.r2[i],c,"r2",i,"",dis)).join("")}</div></div>
+    <div class="group"><h3>${name} finals</h3><div class="matchups">${mu(m.cf.t,m.cf.s,b.cf,c,"cf",-1,"",dis)}</div></div>`;
+}
+function mu(t, s, pick, c, key, idx, cap, dis){
+  const btn = (a, sd) => a
+    ? `<button data-br="${c}|${key}|${idx}|${a}" class="${pick===a?"win":pick?"lose":""}" ${dis?"disabled":""}><span class="sd">${sd||""}</span>${dot(a)}<span>${esc(teamName(a))}</span></button>`
+    : `<div class="tbd">Waiting on an earlier pick</div>`;
+  return `<div class="mu">${cap?`<div class="cap">${esc(cap)}</div>`:""}${btn(t[0],s[0])}${btn(t[1],s[1])}</div>`;
+}
+
+// ===================== win totals pop-up =====================
+let wDraft = null;
+function openWins(){
+  const first = !me.wins;
+  wDraft = Object.assign({}, me.wins || Object.fromEntries(ABBRS.map(a=>[a, Math.ceil(TEAM[a].ou)])));
+  const row = (a, sd) => { const t = TEAM[a]; return `<div class="wrow"><div style="min-width:0"><div class="nm">${sd?`<span class="sd">${sd}</span>`:""}${dot(a)}${esc(t.n)}</div>
+      <div class="meta"><span>O/U <b>${t.ou}</b></span>${t.rec.map((w,i)=>`<span>${SEASONS[i]} <b>${rec(w)}</b></span>`).join("")}</div></div>
+      <div class="step"><span class="ou-tag" id="ou-${a}"></span><button type="button" aria-label="One fewer win for ${esc(t.n)}" data-w="${a}|-1">−</button><input type="number" inputmode="numeric" id="w-${a}" data-win="${a}" value="${wDraft[a]}" min="0" max="82" aria-label="Wins for ${esc(t.n)}"><button type="button" aria-label="One more win for ${esc(t.n)}" data-w="${a}|1">+</button></div></div>`; };
+  let body;
+  if (first) body = BY_NAME.map(a=>row(a)).join("");
+  else { const M = bracketModel(me); body = ["E","W"].map(c=>`<div class="whead">${c==="E"?"East":"West"} · your current order</div>` + M[c].seeds.map((a,i)=>row(a,i+1)).join("")).join(""); }
+  document.getElementById("modalroot").innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Win totals">
+    <div class="mh"><div class="in"><h2>Win totals</h2><div class="tot" id="wtot"></div>
+      <p class="note">${first?"Teams start at their over/under rounded up. ":"Sorted by your standings when you opened this. It won't re-sort while you edit. "}Every game has a winner, so all 30 teams combined win exactly 1,230. That total is a gut check, not a rule.</p></div></div>
+    <div class="mb"><div class="in">${body}</div></div>
+    <div class="mf"><div class="in"><button class="btn" data-act="wreset">Reset to O/U</button><button class="btn" data-act="wcancel">Cancel</button><button class="btn primary" data-act="wdone">Finish</button></div></div>
+  </div>`;
+  document.body.style.overflow = "hidden";
+  ABBRS.forEach(updOU); updTot();
+}
+function updOU(a){ const el=document.getElementById("ou-"+a); if(!el) return; const o = wDraft[a] > TEAM[a].ou; el.textContent = o?"O":"U"; el.className = "ou-tag " + (o?"pos":"neg"); }
+function updTot(){ const t = ABBRS.reduce((s,a)=>s+wDraft[a],0), d=t-1230; document.getElementById("wtot").innerHTML = `League total <b>${t}</b> of 1,230 ${d===0?"· balanced":`· <b class="${d>0?"neg":"pos"}">${d>0?"+":""}${d}</b> ${d>0?"too many wins":"wins unclaimed"}`}`; }
+function closeModal(){ document.getElementById("modalroot").innerHTML = ""; wDraft = null; document.body.style.overflow = ""; }
+
+// ===================== Everyone =====================
+function answer(e, k){
+  const p = e.picks||{};
+  if (k==="hiPlayer") return p.hiPlayer ? `${p.hiPlayer}${p.hiPts?` (${p.hiPts})`:""}` : "";
+  if (k==="fired") return TEAM[p.fired] ? `${TEAM[p.fired].coach} (${nick(p.fired)})` : "";
+  if (["champ","runnerup","bust","surprise","tank"].includes(k)) return teamName(p[k]);
+  return p[k]||"";
+}
+function renderAll(){
+  const v = document.getElementById("v-all");
+  const list = Object.values(entries).sort((a,b)=>a.name.localeCompare(b.name));
+  if (!list.length){ v.innerHTML = `<div class="group"><h2>Everyone</h2><div class="notice">No one has saved picks yet. As people save, their picks show up here side by side.</div></div>`; return; }
+  let body;
+  if (allCat==="__stand") body = `<div class="sheet">${list.map(e=>{ if(!e.wins) return `<div class="ans"><span class="n">${esc(e.name)}</span><span class="muted">Skipped the bonus</span></div>`;
+      const M = bracketModel(e); return `<div class="ans"><span class="n">${esc(e.name)}</span><span>${esc(nick(M.E.seeds[0]))} (${e.wins[M.E.seeds[0]]}) · ${esc(nick(M.W.seeds[0]))} (${e.wins[M.W.seeds[0]]})</span></div>`; }).join("")}</div>`;
+  else {
+    const tally = {}; list.forEach(e=>{ const a = allCat==="hiPlayer" ? (e.picks||{}).hiPlayer : answer(e, allCat); if (a) tally[a]=(tally[a]||0)+1; });
+    body = `<div class="tally">${Object.entries(tally).sort((a,b)=>b[1]-a[1]).map(([k,n])=>`<span>${esc(k)} ×${n}</span>`).join("")}</div>
+      <div class="sheet">${list.map(e=>{ const a = answer(e, allCat); return `<div class="ans"><span class="n">${esc(e.name)}</span><span>${a?esc(a):'<span class="muted">—</span>'}</span></div>`; }).join("")}</div>`;
+  }
+  v.innerHTML = `<div class="group"><h2>Everyone's picks</h2><p class="note">${list.length} ${list.length===1?"entry":"entries"}, updating live. Pick a category to compare.</p>
+    <select id="allcat" aria-label="Category">${CATS.map(c=>`<option value="${c.k}" ${allCat===c.k?"selected":""}>${c.l}</option>`).join("")}<option value="__stand" ${allCat==="__stand"?"selected":""}>Projected #1 seeds</option></select>
+    ${body}</div>
+    <div class="group"><h3>Full sheets</h3><div class="people">${list.map(e=>`<button class="btn" data-sheet="${esc(slugify(e.name))}">${esc(e.name)}</button>`).join("")}</div></div>`;
+}
+function openSheet(slug){
+  const e = entries[slug]; if(!e) return;
+  let html = `<div class="group"><h3>Picks</h3><div class="sheet">${CATS.map(c=>`<div class="ans"><span class="n">${c.l}</span><span>${esc(answer(e,c.k))||'<span class="muted">—</span>'}</span></div>`).join("")}</div></div>`;
+  if (e.wins){
+    const M = bracketModel(e), b = e.bracket||{};
+    const line = c => { const x=b[c]||{}, n = c==="E"?"East":"West"; return `<div class="ans"><span class="n">${n} 2nd round</span><span>${(x.r1||[]).filter(Boolean).map(nick).join(", ")||"—"}</span></div>
+      <div class="ans"><span class="n">${n} conf. finals</span><span>${(x.r2||[]).filter(Boolean).map(nick).join(", ")||"—"}</span></div>
+      <div class="ans"><span class="n">${n} champ</span><span>${x.cf?esc(nick(x.cf)):"—"}</span></div>`; };
+    html += `<div class="group"><h3>Bracket</h3><div class="sheet">${line("E")}${line("W")}</div></div>
+      <div class="group"><h3>Standings</h3><div class="confs">${["E","W"].map(c=>`<div class="sheet" style="overflow-x:auto"><table class="box"><thead><tr><th>#</th><th>${c==="E"?"East":"West"}</th><th>W-L</th></tr></thead><tbody>${M[c].seeds.map((a,i)=>`<tr class="${i===5?"cut":i===9?"cut2":""}"><td>${i+1}</td><td class="tm"><span>${dot(a)}${esc(nick(a))}</span></td><td>${rec(e.wins[a])}</td></tr>`).join("")}</tbody></table></div>`).join("")}</div></div>`;
+  }
+  if (isAdmin) html += `<div class="group"><h3>Commissioner</h3><button class="btn danger" data-del="${esc(slug)}">Delete this entry</button></div>`;
+  document.getElementById("modalroot").innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(e.name)}'s picks">
+    <div class="mh"><div class="in"><h2>${esc(e.name)}</h2></div></div>
+    <div class="mb"><div class="in" style="display:flex;flex-direction:column;gap:18px;padding-block:8px">${html}</div></div>
+    <div class="mf"><div class="in"><button class="btn primary" data-act="close">Close</button></div></div></div>`;
+  document.body.style.overflow = "hidden";
+}
+
+// ===================== Results & scoring =====================
+const norm = s => fold(s).replace(/\(.*?\)/g,"").replace(/[^a-z ]/g," ").replace(/\s+(jr|sr|ii|iii|iv)\s*$/,"").trim().replace(/\s+/g," ");
+function nameEq(a,b){ a=norm(a); b=norm(b); if(!a||!b) return false; if(a===b) return true; const la=a.split(" ").pop(), lb=b.split(" ").pop(); return la.length>2 && la===lb && a[0]===b[0]; }
+function derived(R){
+  const w = R && R.wins; if (!w || !ABBRS.every(a=>typeof w[a]==="number")) return {};
+  const diff = a => w[a]-TEAM[a].ou;
+  const minD = Math.min(...ABBRS.map(diff)), maxD = Math.max(...ABBRS.map(diff)), minW = Math.min(...ABBRS.map(a=>w[a]));
+  return { bust: ABBRS.filter(a=>diff(a)===minD), surprise: ABBRS.filter(a=>diff(a)===maxD), tank: ABBRS.filter(a=>w[a]===minW) };
+}
+function score(e, R){
+  let c=0, t=0; const p = e.picks||{}, A = R.awards||{}, D = derived(R);
+  for (const a of AWARDS) if (A[a.k]) { t++; if (nameEq(p[a.k], A[a.k])) c++; }
+  for (const k of ["champ","runnerup","fired"]) if (R[k]) { t++; if (p[k]===R[k]) c++; }
+  for (const k of ["bust","surprise","tank"]) if (D[k]) { t++; if (D[k].includes(p[k])) c++; }
+  if (R.hiPlayer) { t++; if (nameEq(p.hiPlayer, R.hiPlayer)) c++; }
+  const b = e.bracket||{};
+  const rnd = (key, arr) => { if (!arr || !arr.length) return; for (const cf of ["E","W"]) { const picks = key==="cf" ? [(b[cf]||{}).cf] : ((b[cf]||{})[key]||[]); picks.forEach(x=>{ if(x){ t++; if(arr.includes(x)) c++; } }); } };
+  if (e.wins) { rnd("r1", R.r1); rnd("r2", R.r2); rnd("cf", R.cf); }
+  let dev = null;
+  if (e.wins && R.wins) { const have = ABBRS.filter(a=>typeof R.wins[a]==="number"); if (have.length) dev = have.reduce((s,a)=>s+Math.abs(e.wins[a]-R.wins[a]),0)/have.length; }
+  return {c,t,pct: t? c/t : 0, dev};
+}
+function renderResults(){
+  const v = document.getElementById("v-results"), R = results, list = Object.values(entries);
+  let html = "";
+  if (R && list.length){
+    const sc = list.map(e=>Object.assign({n:e.name}, score(e,R)));
+    const pick = sc.filter(x=>x.t).sort((a,b)=>b.pct-a.pct || b.c-a.c);
+    const st = sc.filter(x=>x.dev!=null).sort((a,b)=>a.dev-b.dev);
+    html += `<div class="group"><h2>Best Picker</h2><p class="note">Share of picks correct (awards, Finals, side bets, bracket rounds), counted as results come in.</p>
+      <div class="sheet">${pick.length?pick.map((x,i)=>`<div class="lb"><span class="rk">${i+1}</span><span>${esc(x.n)}</span><span><b>${Math.round(x.pct*100)}%</b> <span class="muted">${x.c}/${x.t}</span></span></div>`).join(""):`<div class="lb"><span></span><span class="muted">No results entered yet</span><span></span></div>`}</div></div>
+      <div class="group"><h2>Best Standings</h2><p class="note">Average miss in wins across all 30 teams. Lowest wins. Bonus-round players only.</p>
+      <div class="sheet">${st.length?st.map((x,i)=>`<div class="lb"><span class="rk">${i+1}</span><span>${esc(x.n)}</span><span><b>${x.dev.toFixed(1)}</b> <span class="muted">wins off</span></span></div>`).join(""):`<div class="lb"><span></span><span class="muted">Waiting on final records</span><span></span></div>`}</div></div>`;
+  } else {
+    html += `<div class="group"><h2>Results</h2><div class="notice">Scores show up here as the season plays out, once the commissioner enters what happened.</div>
+      <p class="note">Best Picker = % of picks correct. Best Standings = average miss in wins across all 30 teams.</p></div>`;
+  }
+  if (isAdmin) html += adminForm(R||{});
+  else if (mode==="web") html += `<div class="group" style="margin-top:24px"><h3>Commissioner</h3><div class="who"><input type="password" id="adminkey" placeholder="Commissioner password" autocomplete="current-password"><button class="btn" data-act="adminlogin">Log in</button></div></div>`;
+  v.innerHTML = html;
+}
+function adminForm(R){
+  const A = R.awards||{}, w = R.wins||{};
+  const chk = (key, n) => `<div class="chk">${BY_NAME.map(a=>`<label><input type="checkbox" data-rr="${key}" value="${a}" ${(R[key]||[]).includes(a)?"checked":""}>${a}</label>`).join("")}</div><p class="note" style="padding:0 14px 10px">Check the ${n} teams.</p>`;
+  return `<div class="group"><h2>Commissioner</h2><p class="note">Only you see this. Fill in results as they happen and leave anything undecided blank. Disappointment, surprise and tank commander score themselves once all 30 final records are in.</p>
+    <div class="sheet"><div class="awr">${AWARDS.map(a=>`<label for="ra-${a.k}">${a.l}${a.coach ? coachSelect("ra-"+a.k, A[a.k]) : combo("ra-"+a.k, a.list, A[a.k], false)}</label>`).join("")}</div></div>
+    <div class="sheet">
+      <div class="row"><label for="rr-champ">Champion</label>${teamSelect("rr-champ", R.champ)}</div>
+      <div class="row"><label for="rr-runnerup">Runner-up</label>${teamSelect("rr-runnerup", R.runnerup)}</div>
+      <div class="row"><label for="rr-fired">First coach fired</label>${coachSelect("rr-fired", R.fired, false, "", true)}</div>
+      <div class="row"><label for="rr-hiPlayer">Highest-scoring game</label><div class="split">${combo("rr-hiPlayer","all",R.hiPlayer,false)}<input type="number" id="rr-hiPts" value="${esc(R.hiPts)}" placeholder="Pts"></div></div>
+    </div>
+    <h3>Won first round</h3><div class="sheet">${chk("r1",8)}</div>
+    <h3>Won conference semis</h3><div class="sheet">${chk("r2",4)}</div>
+    <h3>Won conference finals</h3><div class="sheet">${chk("cf",2)}</div>
+    <h3>Final regular-season wins</h3><div class="sheet"><div class="awr">${BY_NAME.map(a=>`<label>${esc(TEAM[a].n)}<input type="number" inputmode="numeric" id="rw-${a}" value="${typeof w[a]==="number"?w[a]:""}" min="0" max="82"></label>`).join("")}</div></div>
+    <button class="btn primary block" data-act="saveresults">Save results</button>
+    ${mode==="web"?`<button class="btn" data-act="adminlogout">Log out of commissioner</button>`:""}
+  </div>`;
+}
+
+// ===================== save bar & render =====================
+function renderSaveBar(){
+  const bar = document.getElementById("savebar"), st = document.getElementById("savestatus"), b = document.getElementById("savebtn");
+  const show = tab==="picks" && me.name && canEdit() && mode!=="none";
+  bar.hidden = !show; if (!show) return;
+  b.disabled = !dirty;
+  st.textContent = dirty ? "Unsaved changes" : (entries[slugify(me.name)] ? "All changes saved" : "Not saved yet");
+}
+function renderAllViews(){
+  renderLock();
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected", b.dataset.tab===tab));
+  for (const t of ["picks","all","results"]) document.getElementById("v-"+t).hidden = t!==tab;
+  ({picks:renderPicks, all:renderAll, results:renderResults})[tab]();
+  renderSaveBar();
+}
+function softRefresh(){
+  // Called when shared data changes. Don't wipe a form someone is typing into.
+  const ae = document.activeElement, typing = ae && /INPUT|SELECT|TEXTAREA/.test(ae.tagName);
+  if (document.querySelector(".modal")) { renderSaveBar(); return; }
+  if (tab==="picks" && me.name) { renderSaveBar(); return; }
+  if (tab==="results" && isAdmin) return;
+  if (typing && tab==="picks") return;
+  renderAllViews();
+}
+let toastT;
+function toast(msg){ let el=document.querySelector(".toast"); if(!el){ el=document.createElement("div"); el.className="toast"; el.setAttribute("role","status"); document.body.appendChild(el);} el.textContent=msg; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true, 3000); }
+
+// ===================== actions =====================
+function setName(){
+  const inp = document.getElementById("nameinput"); const name = (inp.value||"").trim().replace(/\s+/g," ");
+  if (!slugify(name)) { toast("Enter a name with at least one letter"); return; }
+  const ex = entries[slugify(name)];
+  me = ex ? JSON.parse(JSON.stringify(ex)) : blank(name);
+  me.picks = me.picks||{}; me.bracket = me.bracket || blank("").bracket;
+  dirty = false; store("pp27-draft", me);
+  if (ex) toast("Loaded your saved picks");
+  renderAllViews(); window.scrollTo(0,0);
+}
+async function saveMine(){
+  if (!me.name) return;
+  const btn = document.getElementById("savebtn"); btn.disabled = true; btn.textContent = "Saving…";
+  const firstSave = !entries[slugify(me.name)];
+  try{
+    const doc = JSON.parse(JSON.stringify(me)); doc.updatedAt = Date.now();
+    await api.saveEntry(slugify(me.name), doc);
+    me.updatedAt = doc.updatedAt; entries[slugify(me.name)] = doc; dirty = false; store("pp27-draft", me);
+    if (!me.wins) {
+      toast(firstSave ? "Saved! Want to do the bonus round? It's right below." : "Picks saved");
+      renderAllViews();
+      if (firstSave) setTimeout(()=>{ const b = document.getElementById("bonus"); if (b) b.scrollIntoView({block:"start"}); }, 50);
+    } else { toast("Picks saved"); const y = window.scrollY; renderAllViews(); window.scrollTo(0,y); }
+  }catch(e){
+    if (e && (e.code==="42501" || e.status===401 || e.status===403)) toast(locked() ? "Picks are locked" : "Couldn't save. Ask the commissioner to check the setup.");
+    else toast("Couldn't save. Check your connection and try again.");
+  }
+  btn.textContent = "Save picks"; renderSaveBar();
+}
+async function saveResults(){
+  const R = {awards:{}, wins:{}};
+  AWARDS.forEach(a=>{ const v=document.getElementById("ra-"+a.k).value.trim(); if(v) R.awards[a.k]=v; });
+  for (const k of ["champ","runnerup","fired"]) { const v=document.getElementById("rr-"+k).value; if(v) R[k]=v; }
+  const hp = document.getElementById("rr-hiPlayer").value.trim(); if (hp) R.hiPlayer = hp;
+  const pts = document.getElementById("rr-hiPts").value; if (pts) R.hiPts = Number(pts);
+  for (const key of ["r1","r2","cf"]) R[key] = [...document.querySelectorAll(`[data-rr="${key}"]:checked`)].map(x=>x.value);
+  ABBRS.forEach(a=>{ const v=document.getElementById("rw-"+a).value; if(v!=="") R.wins[a]=Math.max(0,Math.min(82,Number(v))); });
+  R.updatedAt = Date.now();
+  try{ await api.saveResults(R); results = R; toast("Results saved"); renderAllViews(); }
+  catch(e){ toast("Couldn't save results. Try again."); }
+}
+
+document.addEventListener("mousedown", ev=>{ if (ev.target.closest(".sugg")) ev.preventDefault(); });
+document.addEventListener("click", async ev=>{
+  const t = ev.target.closest("button"); if(!t) return;
+  if (t.dataset.fill != null){
+    const inp = t.closest(".combo").querySelector("input");
+    inp.value = t.dataset.fill; hideSugg();
+    if (inp.dataset.pick){ me.picks[inp.dataset.pick] = inp.value; markDirty(); }
+    inp.blur(); return;
+  }
+  if (t.dataset.tab){ tab = t.dataset.tab; store("pp27-tab", tab); renderAllViews(); window.scrollTo(0,0); return; }
+  if (t.id==="savebtn") return saveMine();
+  if (t.dataset.sheet) return openSheet(t.dataset.sheet);
+  if (t.dataset.del){
+    if (!t.dataset.confirm){ t.dataset.confirm="1"; t.textContent="Tap again to delete for good"; return; }
+    try{ await api.deleteEntry(t.dataset.del); delete entries[t.dataset.del]; closeModal(); renderAllViews(); toast("Entry deleted"); }catch(e){ toast("Couldn't delete. Try again."); }
+    return;
+  }
+  if (t.dataset.w){ const [a,d] = t.dataset.w.split("|"); wDraft[a] = Math.max(0, Math.min(82, wDraft[a]+Number(d))); document.getElementById("w-"+a).value = wDraft[a]; updOU(a); updTot(); return; }
+  if (t.dataset.br){
+    const [c,key,idx,a] = t.dataset.br.split("|");
+    if (key==="finals") me.bracket.finals = me.bracket.finals===a?null:a;
+    else if (key==="r1"||key==="r2") { const arr = me.bracket[c][key]; arr[+idx] = arr[+idx]===a?null:a; }
+    else me.bracket[c][key] = me.bracket[c][key]===a?null:a;
+    sanitize(me); markDirty(); const y = window.scrollY; renderPicks(); window.scrollTo(0,y); return;
+  }
+  switch (t.dataset.act){
+    case "setname": return setName();
+    case "switch":
+      if (dirty && !t.dataset.confirm){ t.dataset.confirm="1"; t.textContent="Unsaved changes. Tap again"; return; }
+      me = blank(""); dirty=false; store("pp27-draft", null); return renderAllViews();
+    case "openwins": return openWins();
+    case "wreset": ABBRS.forEach(a=>{ wDraft[a]=Math.ceil(TEAM[a].ou); document.getElementById("w-"+a).value=wDraft[a]; updOU(a); }); return updTot();
+    case "wcancel": case "close": return closeModal();
+    case "wdone": {
+      me.wins = Object.assign({}, wDraft); sanitize(me); markDirty(); closeModal(); renderAllViews();
+      setTimeout(()=>{ const b = document.getElementById("bonus"); if (b) b.scrollIntoView({block:"start"}); }, 50);
+      toast("Standings set. Now pick your bracket, then Save."); return;
+    }
+    case "saveresults": return saveResults();
+    case "adminlogin": {
+      const k = document.getElementById("adminkey").value;
+      try{ const ok = await rpc("admin_check", {p_key:k}); if (ok===true){ adminKey = k; store("pp27-admin", k); isAdmin = true; toast("Commissioner mode on"); renderAllViews(); } else toast("Wrong password"); }
+      catch(e){ toast("Couldn't check the password. Try again."); }
+      return;
+    }
+    case "adminlogout": adminKey = null; isAdmin = false; store("pp27-admin", null); return renderAllViews();
+  }
+});
+document.addEventListener("focusin", ev=>{ const el = ev.target; if (el.matches && el.matches(".combo input")) showSugg(el); });
+document.addEventListener("focusout", ev=>{ if (ev.target.matches && ev.target.matches(".combo input")) setTimeout(()=>{ if (!document.activeElement || !document.activeElement.closest || !document.activeElement.closest(".combo")) hideSugg(); }, 150); });
+document.addEventListener("input", ev=>{
+  const el = ev.target;
+  if (el.dataset.win){ const a = el.dataset.win; let n = parseInt(el.value,10); if (isNaN(n)) return; n = Math.max(0,Math.min(82,n)); wDraft[a]=n; updOU(a); updTot(); return; }
+  if (el.matches(".combo input")) showSugg(el);
+  if (el.dataset.pick && el.tagName==="INPUT"){ me.picks[el.dataset.pick] = el.value.trim(); markDirty(); }
+});
+document.addEventListener("change", ev=>{
+  const el = ev.target;
+  if (el.dataset.win){ el.value = wDraft[el.dataset.win]; return; }
+  if (el.dataset.pick && el.tagName==="SELECT"){
+    me.picks[el.dataset.pick] = el.value; markDirty();
+    if ((el.dataset.pick==="champ"||el.dataset.pick==="runnerup") && me.bracket && me.bracket.finals){ me.bracket.finals = null; toast("Your bracket's Finals pick was cleared to match"); const y=window.scrollY; renderPicks(); window.scrollTo(0,y); }
+  }
+  if (el.id==="allcat"){ allCat = el.value; renderAll(); }
+});
+document.addEventListener("keydown", ev=>{
+  if (ev.key==="Enter" && ev.target.id==="nameinput") setName();
+  if (ev.key==="Enter" && ev.target.id==="adminkey") document.querySelector('[data-act="adminlogin"]').click();
+  if (ev.key==="Escape") { if (document.querySelector(".sugg:not([hidden])")) hideSugg(); else if (document.querySelector(".modal")) closeModal(); }
+});
+
+renderAllViews();
+let wasLocked = locked();
+setInterval(()=>{ renderLock(); if (locked()!==wasLocked){ wasLocked = locked(); if (!document.querySelector(".modal")) renderAllViews(); } }, 30000);
+
+// ===================== connect =====================
+async function refresh(){
+  try{ await api.loadAll(); loadErr = false; } catch(e){ loadErr = true; }
+  softRefresh();
+}
+(async ()=>{
+  if (mode==="web"){
+    if (adminKey){ try{ isAdmin = (await rpc("admin_check", {p_key:adminKey}))===true; }catch(e){} if (!isAdmin) { adminKey=null; store("pp27-admin", null); } }
+    try{ await api.loadAll(); }catch(e){ loadErr = true; }
+    renderAllViews();
+    setInterval(()=>{ if (document.visibilityState==="visible") refresh(); }, 8000);
+    document.addEventListener("visibilitychange", ()=>{ if (document.visibilityState==="visible") refresh(); });
+    return;
+  }
+  // Preview inside Claude: use the artifact's shared store.
+  if (!window.claude || !window.claude.use) return;
+  const [d,u] = await Promise.all([claude.use("db").catch(()=>null), claude.use("user").catch(()=>null)]);
+  if (!d) return;
+  cdb = d; mode = "claude";
+  if (u){ try{ isOwner = !!(await u.isOwner()); }catch(e){} }
+  isAdmin = isOwner;
+  cdb.collection("entries").onSnapshot(snap=>{ const next = {}; snap.docs.forEach(x=>{ const v=x.data(); if (v && v.name) next[x.id]=v; }); entries = next; softRefresh(); }, ()=>{});
+  cdb.doc("meta/results").onSnapshot(s=>{ results = s.exists ? s.data() : null; softRefresh(); }, ()=>{});
+  renderAllViews();
+})();
+})();
+</script>
+
+</body>
+</html>
