@@ -165,7 +165,7 @@ const CONFIG = {
 };
 /* ================================================================================ */
 (function(){
-const LOCK = Date.parse("2026-10-20T22:00:00-04:00");
+const LOCK = Date.parse("2026-10-23T23:59:00-04:00");
 const SEASONS = ["23-24","24-25","25-26"];
 // abbr, name, conf, over/under, wins 23-24 / 24-25 / 25-26 (Basketball Reference), color, head coach
 const T = [
@@ -378,9 +378,9 @@ function ouSelect(id, val, dis, attrs){
 // ===================== header =====================
 function renderLock(){
   const el = document.getElementById("lockline");
-  if (locked()) { el.innerHTML = `<span class="pill closed">Locked</span> Picks closed Tue Oct 20, 10:00 PM ET`; return; }
+  if (locked()) { el.innerHTML = `<span class="pill closed">Locked</span> Picks closed Fri Oct 23, 11:59 PM ET`; return; }
   const ms = LOCK - Date.now(), d = Math.floor(ms/864e5), h = Math.floor(ms%864e5/36e5), m = Math.floor(ms%36e5/6e4);
-  el.innerHTML = `<span class="pill">Open</span> Locks <b>Tue Oct 20, 10:00 PM ET</b> · ${d?d+"d ":""}${h}h ${m}m left`;
+  el.innerHTML = `<span class="pill">Open</span> Locks <b>Fri Oct 23, 11:59 PM ET</b> · ${d?d+"d ":""}${h}h ${m}m left`;
 }
 
 // ===================== My Picks =====================
