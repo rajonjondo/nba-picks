@@ -213,7 +213,7 @@ const L = {
  smoy:["Dylan Harper","Ajay Mitchell","Reed Sheppard","Anthony Black","Aaron Wiggins","Ace Bailey","Damian Lillard","Scoot Henderson","Bennedict Mathurin","Collin Sexton","Grayson Allen","Isaiah Joe","Jaime Jaquez Jr.","Jeremiah Fears","Keldon Johnson","Payton Pritchard","Naz Reid","Malik Monk"],
  mip:["Brandon Miller","Payton Pritchard","Kel'el Ware","Jaden McDaniels","Collin Murray-Boyles","Ausar Thompson","Walker Kessler","Ty Jerome","Zach Edey","Coby White","Stephon Castle","Ayo Dosunmu","Terrence Shannon Jr.","Ajay Mitchell","Matas Buzelis","Keegan Murray","Davion Mitchell","Kon Knueppel","Scoot Henderson","Donovan Clingan","Reed Sheppard","Jabari Smith Jr.","Alexandre Sarr","Egor Demin","Khaman Maluach","Cedric Coward","Trey Murphy III","Evan Mobley","Rui Hachimura","Ace Bailey"]
 };
-L.all = [...new Set([...L.mvp,...L.dpoy,...L.mip,...L.roy,...L.smoy])].sort();
+L.all = [...new Set([...L.mvp,...L.dpoy,...L.mip,...L.roy,...L.smoy])].sort((a,b)=>a.localeCompare(b));
 
 const AWARDS = [
  {k:"mvp",l:"MVP",list:"mvp"},
@@ -358,8 +358,10 @@ function combo(id, list, val, dis, attrs){
 function showSugg(inp){
   const box = inp.parentElement.querySelector(".sugg"), q = fold(inp.value.trim());
   const src = L[inp.dataset.list] || [];
-  let hits = !q ? src.slice(0,8) : src.filter(n=>fold(n).includes(q)).sort((a,b)=>{
-    const sa = fold(a).split(/\s+/).some(w=>w.startsWith(q)) ? 0 : 1, sb2 = fold(b).split(/\s+/).some(w=>w.startsWith(q)) ? 0 : 1; return sa - sb2; }).slice(0,8);
+  // Empty box: show this award's favorites. Typing: search this award's list first, then every player we know.
+  const rank = n => fold(n).split(/\s+/).some(w=>w.startsWith(q)) ? 0 : 1;
+  const match = list => list.filter(n=>fold(n).includes(q)).sort((a,b)=>rank(a)-rank(b));
+  let hits = !q ? src.slice(0,8) : [...new Set([...match(src), ...match(L.all)])].slice(0,8);
   if (hits.length===1 && fold(hits[0])===q) hits = [];
   box.innerHTML = hits.map(n=>`<button type="button" data-fill="${esc(n)}">${esc(n)}</button>`).join("");
   box.hidden = !hits.length;
