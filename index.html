@@ -121,6 +121,27 @@ table.box tr.cut2 td{border-bottom:2px dashed var(--muted)}
 .step input{width:3.4em;text-align:center;font-weight:700;padding:8px 2px}
 .ou-tag{font-size:12px;font-weight:700;width:1.6em;text-align:center}
 /* everyone */
+.cat{display:grid;grid-template-columns:minmax(0,7.5em) minmax(0,1fr);gap:10px;padding:10px 14px;border-top:1px solid var(--line)}
+.cat:first-child{border-top:0}
+.cat .cl{font-size:13px;font-weight:600;color:var(--muted);padding-top:2px}
+.cat .cg{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pk{font-size:15px;line-height:1.3}
+.pk b{font-weight:700}
+.pk .ct{margin-left:6px;font-size:12px;font-weight:700;color:var(--accent)}
+.pk .who2{display:block;font-size:13px;color:var(--muted)}
+.grid-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.grid{border-collapse:separate;border-spacing:0;font-size:14px;min-width:100%}
+table.grid th,table.grid td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.grid thead th{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:14px;white-space:nowrap}
+table.grid tbody th{font-weight:600;font-size:13px}
+table.grid th:first-child{position:sticky;left:0;z-index:1;background:var(--surface);box-shadow:1px 0 0 var(--line)}
+table.grid tr:last-child > *{border-bottom:0}
+table.grid td.lone{font-weight:700}
+table.grid tr.sub th{background:var(--sunk);color:var(--fg);font-family:var(--display);text-transform:uppercase;letter-spacing:.06em}
+table.grid td small{font-size:11px;font-weight:600;color:var(--muted);margin-left:4px}
+table.grid .tn{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+table.grid td{text-align:center}
+table.grid td.pos,table.grid td.neg{font-weight:700;min-width:3em}
 .ans{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px;padding:9px 14px;border-top:1px solid var(--line);font-size:15px}
 .ans:first-child{border-top:0}
 .ans .n{font-weight:600}
@@ -492,22 +513,40 @@ function answer(e, k){
   if (["champ","runnerup","bust","surprise","tank"].includes(k)) return teamName(p[k]);
   return p[k]||"";
 }
+function short(e, k){
+  // Compact answer for the grid: team nicknames instead of full names.
+  const p = e.picks||{};
+  if (k==="fired") return TEAM[p.fired] ? `${TEAM[p.fired].coach.split(" ").pop()} (${nick(p.fired)})` : "";
+  if (["champ","runnerup","bust","surprise","tank"].includes(k)) return nick(p[k]);
+  if (k==="eChamp"||k==="wChamp"){ const x = ((e.bracket||{})[k==="eChamp"?"E":"W"]||{}).cf; return e.wins && x ? nick(x) : ""; }
+  return answer(e, k);
+}
 function renderAll(){
   const v = document.getElementById("v-all");
   const list = Object.values(entries).sort((a,b)=>a.name.localeCompare(b.name));
   if (!list.length){ v.innerHTML = `<div class="group"><h2>Everyone</h2><div class="notice">No one has saved picks yet. As people save, their picks show up here side by side.</div></div>`; return; }
-  let body;
-  if (allCat==="__stand") body = `<div class="sheet">${list.map(e=>{ if(!e.wins) return `<div class="ans"><span class="n">${esc(e.name)}</span><span class="muted">Skipped the bonus</span></div>`;
-      const M = bracketModel(e); return `<div class="ans"><span class="n">${esc(e.name)}</span><span>${esc(nick(M.E.seeds[0]))} (${e.wins[M.E.seeds[0]]}) · ${esc(nick(M.W.seeds[0]))} (${e.wins[M.W.seeds[0]]})</span></div>`; }).join("")}</div>`;
-  else {
-    const tally = {}; list.forEach(e=>{ const a = allCat==="hiPlayer" ? (e.picks||{}).hiPlayer : answer(e, allCat); if (a) tally[a]=(tally[a]||0)+1; });
-    body = `<div class="tally">${Object.entries(tally).sort((a,b)=>b[1]-a[1]).map(([k,n])=>`<span>${esc(k)} ×${n}</span>`).join("")}</div>
-      <div class="sheet">${list.map(e=>{ const a = answer(e, allCat); return `<div class="ans"><span class="n">${esc(e.name)}</span><span>${a?esc(a):'<span class="muted">—</span>'}</span></div>`; }).join("")}</div>`;
+  const rows = [...CATS.slice(0,8), {k:"eChamp",l:"East champ"},{k:"wChamp",l:"West champ"}, ...CATS.slice(8)];
+  const picks = rows.map(c=>{
+    const groups = {};
+    list.forEach(e=>{ const x = short(e,c.k); if (!x) return; const k = c.k==="hiPlayer" ? fold((e.picks||{}).hiPlayer) : fold(x); (groups[k] = groups[k] || {label: c.k==="hiPlayer" ? (e.picks||{}).hiPlayer : x, who:[]}).who.push(c.k==="hiPlayer" && (e.picks||{}).hiPts ? `${e.name} (${e.picks.hiPts})` : e.name); });
+    const g = Object.values(groups).sort((x,y)=>y.who.length-x.who.length || x.label.localeCompare(y.label));
+    if (!g.length) return "";
+    return `<div class="cat"><div class="cl">${esc(c.l)}</div><div class="cg">${g.map(x=>`<div class="pk"><b>${esc(x.label)}</b>${x.who.length>1?`<span class="ct">×${x.who.length}</span>`:""}<span class="who2">${x.who.map(esc).join(", ")}</span></div>`).join("")}</div></div>`;
+  }).join("");
+  const bonus = list.filter(e=>e.wins);
+  let stand = "";
+  if (bonus.length){
+    const shead = `<tr><th></th><th>O/U</th>${bonus.map(e=>`<th>${esc(e.name)}</th>`).join("")}</tr>`;
+    const conf = c => `<tr class="sub"><th colspan="${bonus.length+2}">${c==="E"?"East":"West"}</th></tr>` +
+      ABBRS.filter(a=>TEAM[a].c===c).sort((x,y)=>TEAM[y].ou-TEAM[x].ou || TEAM[x].n.localeCompare(TEAM[y].n)).map(a=>
+        `<tr><th><span class="tn">${dot(a)}${esc(nick(a))}</span></th><td class="muted">${TEAM[a].ou}</td>${bonus.map(e=>{ const w=e.wins[a], seed = bracketModel(e)[c].seeds.indexOf(a)+1; return `<td class="${w>TEAM[a].ou?"pos":"neg"}">${w}<small>#${seed}</small></td>`; }).join("")}</tr>`).join("");
+    stand = `<div class="group"><h2>Win totals</h2><p class="note">Green = over the O/U, red = under. Small number = their projected seed. Teams sorted by O/U.</p>
+      <div class="sheet grid-wrap"><table class="grid"><thead>${shead}</thead><tbody>${conf("E")}${conf("W")}</tbody></table></div></div>`;
   }
-  v.innerHTML = `<div class="group"><h2>Everyone's picks</h2><p class="note">${list.length} ${list.length===1?"entry":"entries"}, updating live. Pick a category to compare.</p>
-    <select id="allcat" aria-label="Category">${CATS.map(c=>`<option value="${c.k}" ${allCat===c.k?"selected":""}>${c.l}</option>`).join("")}<option value="__stand" ${allCat==="__stand"?"selected":""}>Projected #1 seeds</option></select>
-    ${body}</div>
-    <div class="group"><h3>Full sheets</h3><div class="people">${list.map(e=>`<button class="btn" data-sheet="${esc(slugify(e.name))}">${esc(e.name)}</button>`).join("")}</div></div>`;
+  const skipped = list.filter(e=>!e.wins).map(e=>e.name);
+  v.innerHTML = `<div class="group"><h2>Everyone's picks</h2><p class="note">${list.length} ${list.length===1?"entry":"entries"}, updating live. Most popular pick first.</p>
+    <div class="sheet">${picks}</div></div>
+    ${stand}${skipped.length && bonus.length ? `<p class="note">Skipped the bonus round: ${skipped.map(esc).join(", ")}</p>` : ""}`;
 }
 function openSheet(slug){
   const e = entries[slug]; if(!e) return;
@@ -585,6 +624,8 @@ function adminForm(R){
     <h3>Won conference finals</h3><div class="sheet">${chk("cf",2)}</div>
     <h3>Final regular-season wins</h3><div class="sheet"><div class="awr">${BY_NAME.map(a=>`<label>${esc(TEAM[a].n)}<input type="number" inputmode="numeric" id="rw-${a}" value="${typeof w[a]==="number"?w[a]:""}" min="0" max="82"></label>`).join("")}</div></div>
     <button class="btn primary block" data-act="saveresults">Save results</button>
+    <h3>Delete an entry</h3>
+    <div class="who"><select id="delpick" aria-label="Entry to delete"><option value="">Pick an entry</option>${Object.entries(entries).sort((a,b)=>a[1].name.localeCompare(b[1].name)).map(([k,e])=>`<option value="${esc(k)}">${esc(e.name)}</option>`).join("")}</select><button class="btn danger" data-act="delentry">Delete</button></div>
     ${mode==="web"?`<button class="btn" data-act="adminlogout">Log out of commissioner</button>`:""}
   </div>`;
 }
@@ -698,6 +739,12 @@ document.addEventListener("click", async ev=>{
       toast("Standings set. Now pick your bracket, then Save."); return;
     }
     case "saveresults": return saveResults();
+    case "delentry": {
+      const slug = document.getElementById("delpick").value; if (!slug) return toast("Pick an entry first");
+      if (!t.dataset.confirm){ t.dataset.confirm="1"; t.textContent="Tap again to delete"; return; }
+      try{ await api.deleteEntry(slug); delete entries[slug]; toast("Entry deleted"); renderAllViews(); }catch(e){ toast("Couldn't delete. Try again."); }
+      return;
+    }
     case "adminlogin": {
       const k = document.getElementById("adminkey").value;
       try{ const ok = await rpc("admin_check", {p_key:k}); if (ok===true){ adminKey = k; store("pp27-admin", k); isAdmin = true; toast("Commissioner mode on"); renderAllViews(); } else toast("Wrong password"); }
