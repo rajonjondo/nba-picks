@@ -210,15 +210,16 @@ const L = {
  mvp:["Victor Wembanyama","Shai Gilgeous-Alexander","Nikola Jokic","Luka Doncic","Giannis Antetokounmpo","Anthony Edwards","Jayson Tatum","Cade Cunningham","Jalen Brunson","Donovan Mitchell","Jaylen Brown","Tyrese Maxey","Kawhi Leonard","Tyrese Haliburton","Kevin Durant","Joel Embiid","Stephen Curry","Devin Booker","Cooper Flagg","Deni Avdija","Zion Williamson","Scottie Barnes","Jamal Murray","Jalen Johnson","Paolo Banchero","LaMelo Ball","LeBron James","Austin Reaves","Anthony Davis","Karl-Anthony Towns","Tyler Herro","Alperen Sengun","James Harden","Ja Morant","Pascal Siakam","Amen Thompson","Bam Adebayo","Josh Giddey","Desmond Bane","Damian Lillard","Brandon Ingram","Domantas Sabonis","Lauri Markkanen","Jaren Jackson Jr.","Trae Young","Michael Porter Jr.","Franz Wagner","Kyrie Irving","Darius Garland","Jalen Williams"],
  dpoy:["Victor Wembanyama","Chet Holmgren","Ausar Thompson","Rudy Gobert","Bam Adebayo","Evan Mobley","Scottie Barnes","Amen Thompson","Jaren Jackson Jr.","OG Anunoby","Giannis Antetokounmpo","Jaden McDaniels","Dyson Daniels","Walker Kessler","Jalen Suggs","Ivica Zubac","Donovan Clingan","Alex Caruso","Cason Wallace","Stephon Castle","Draymond Green","Jalen Duren","Derrick White","Herbert Jones","Anthony Davis"],
  roy:["Cameron Boozer","Darryn Peterson","AJ Dybantsa","Caleb Wilson","Darius Acuff Jr.","Mikel Brown Jr.","Yaxel Lendeborg","Keaton Wagler","Brayden Burries","Christian Anderson Jr.","Nate Ament","Kingston Flemings","Morez Johnson Jr.","Labaron Philon Jr.","Cameron Carr","Aday Mara","Karim López","Dailyn Swain","Hannes Steinbach"],
+ smoy:["Dylan Harper","Ajay Mitchell","Reed Sheppard","Anthony Black","Aaron Wiggins","Ace Bailey","Damian Lillard","Scoot Henderson","Bennedict Mathurin","Collin Sexton","Grayson Allen","Isaiah Joe","Jaime Jaquez Jr.","Jeremiah Fears","Keldon Johnson","Payton Pritchard","Naz Reid","Malik Monk"],
  mip:["Brandon Miller","Payton Pritchard","Kel'el Ware","Jaden McDaniels","Collin Murray-Boyles","Ausar Thompson","Walker Kessler","Ty Jerome","Zach Edey","Coby White","Stephon Castle","Ayo Dosunmu","Terrence Shannon Jr.","Ajay Mitchell","Matas Buzelis","Keegan Murray","Davion Mitchell","Kon Knueppel","Scoot Henderson","Donovan Clingan","Reed Sheppard","Jabari Smith Jr.","Alexandre Sarr","Egor Demin","Khaman Maluach","Cedric Coward","Trey Murphy III","Evan Mobley","Rui Hachimura","Ace Bailey"]
 };
-L.all = [...new Set([...L.mvp,...L.dpoy,...L.mip,...L.roy])].sort();
+L.all = [...new Set([...L.mvp,...L.dpoy,...L.mip,...L.roy,...L.smoy])].sort();
 
 const AWARDS = [
  {k:"mvp",l:"MVP",list:"mvp"},
  {k:"dpoy",l:"Defensive POY",list:"dpoy"},
  {k:"roy",l:"Rookie of the Year",list:"roy"},
- {k:"smoy",l:"Sixth Man",list:"all"},
+ {k:"smoy",l:"Sixth Man",list:"smoy"},
  {k:"mip",l:"Most Improved",list:"mip"},
  {k:"coy",l:"Coach of the Year",coach:true},
  {k:"clutch",l:"Clutch Player",list:"all"},
