@@ -1,0 +1,35 @@
+# Every 3 days: read the picks from Supabase (which counts as activity, so the
+# free project doesn't get paused) and save a backup copy into data/.
+# If Supabase is already paused this run fails, and GitHub emails you.
+name: Keep database awake + back up picks
+
+on:
+  schedule:
+    - cron: "17 14 */3 * *"   # about every 3 days, mid-morning ET
+  workflow_dispatch: {}        # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read picks from Supabase
+        env:
+          URL: https://pdeqsbdwuwzqtbytercp.supabase.co/rest/v1
+          KEY: sb_publishable_7Wi3gQROlkPZWW4wClM48w_lrKZq3Mo
+        run: |
+          mkdir -p data
+          curl -sSf "$URL/entries?select=slug,data&order=slug" -H "apikey: $KEY" -o data/entries.json
+          curl -sSf "$URL/results?id=eq.1&select=data" -H "apikey: $KEY" -o data/results.json
+          python3 -c "import json; n=len(json.load(open('data/entries.json'))); print(f'{n} entries backed up')"
+          date -u +"%Y-%m-%dT%H:%MZ" > data/last-check.txt
+      - name: Save backup
+        run: |
+          git config user.name "picks-bot"
+          git config user.email "picks-bot@users.noreply.github.com"
+          git add data
+          git commit -m "Backup picks ($(cat data/last-check.txt))" || echo "nothing to commit"
+          git push

@@ -293,10 +293,16 @@ const rpc = (fn, args) => sb("rpc/"+fn, {method:"POST", body: JSON.stringify(arg
 const api = {
   async loadAll(){
     if (mode==="web"){
-      const rows = await sb("entries?select=slug,data");
+      let rows, rr;
+      try { rows = await sb("entries?select=slug,data"); rr = await sb("results?id=eq.1&select=data"); usingBackup = false; }
+      catch(e){
+        // Database asleep or unreachable: fall back to the backup copy saved in the GitHub repo.
+        const bk = await fetch("data/entries.json", {cache:"no-store"}).then(r=>r.ok?r.json():Promise.reject(e));
+        rows = bk; rr = await fetch("data/results.json", {cache:"no-store"}).then(r=>r.ok?r.json():[]).catch(()=>[]);
+        usingBackup = true;
+      }
       const next = {}; (rows||[]).forEach(r=>{ if (r.data && r.data.name) next[r.slug] = r.data; });
       entries = next;
-      const rr = await sb("results?id=eq.1&select=data");
       results = rr && rr[0] ? rr[0].data : null;
     }
   },
@@ -322,7 +328,7 @@ const api = {
 let entries = {}, results = null;
 let tab = "picks", allCat = "mvp";
 let me = blank(""), dirty = false;
-let loadErr = false;
+let loadErr = false, usingBackup = false;
 
 function blank(name){ return {name, picks:{}, wins:null, bracket:{E:{r1:[],r2:[]},W:{r1:[],r2:[]},finals:null}, updatedAt:0}; }
 const draft = load("pp27-draft");
@@ -427,6 +433,7 @@ function statusNotice(){
   if (locked() && !isAdmin) return `<div class="notice">Picks are locked. Check the Everyone tab to compare.</div>`;
   if (mode==="none") return `<div class="notice warn">This copy of the site isn't connected to the shared picks list yet, so picks can't be saved.</div>`;
   if (loadErr) return `<div class="notice warn">Couldn't reach the picks list. Check your connection; the page retries on its own.</div>`;
+  if (usingBackup) return `<div class="notice warn">The picks database is asleep, so you're seeing the last saved copy. Saving is off until the commissioner wakes it up.</div>`;
   return "";
 }
 function renderPicks(){
@@ -544,7 +551,7 @@ function renderAll(){
       <div class="sheet grid-wrap"><table class="grid"><thead>${shead}</thead><tbody>${conf("E")}${conf("W")}</tbody></table></div></div>`;
   }
   const skipped = list.filter(e=>!e.wins).map(e=>e.name);
-  v.innerHTML = `<div class="group"><h2>Everyone's picks</h2><p class="note">${list.length} ${list.length===1?"entry":"entries"}, updating live. Most popular pick first.</p>
+  v.innerHTML = (usingBackup ? `<div class="notice">Showing the last saved copy of everyone's picks.</div>` : "") + `<div class="group"><h2>Everyone's picks</h2><p class="note">${list.length} ${list.length===1?"entry":"entries"}, updating live. Most popular pick first.</p>
     <div class="sheet">${picks}</div></div>
     ${stand}${skipped.length && bonus.length ? `<p class="note">Skipped the bonus round: ${skipped.map(esc).join(", ")}</p>` : ""}`;
 }
